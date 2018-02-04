@@ -1,0 +1,6 @@
+framework module Pods_Tapo_Dots {
+  umbrella header "Pods-Tapo Dots-umbrella.h"
+
+  export *
+  module * { export * }
+}
