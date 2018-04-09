@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class GameScene: SKScene {
     
@@ -21,16 +22,22 @@ class GameScene: SKScene {
     
     private var scoreLabel = SKLabelNode()
     
-    private final let startSpeedOfShapes = 1.5
-    private final let startfreqOfShapes = 3.0
+    private final let startSpeedOfShapes = 1.6
+    private final let startfreqOfShapes = 2.5
     private final let maxSpeedOfShapes = 0.85 //decreases to max speed
     private final let maxfreqOfShapes = 5.8 //increases to max speed
-    private final let scoreTillMaxSpeed = 150.0 //since every other score is updated really 300
+    private final let scoreTillMaxSpeed = 250.0 //since every other score is updated really 300
+    private final var backroundmusicRate = 1.0
+    private final var maxBackroundmusicRate = 1.2
     
     private var speedOfShapes = 0.0
     private var freqOfShapes = 0.0
     private var totalScore = 0
-    var ratio = CGFloat(0.0)
+    private var ratio = CGFloat(0.0)
+    private var backgroundMusic:SKAudioNode!
+    let loseSound = SKAction.playSoundFileNamed(Common.MissWav, waitForCompletion: false)
+    let worldNode = SKNode()
+    var backgroundMusicPlayer : AVAudioPlayer?
     
     func changeBackground(){
         let randomShapeSide = Int(arc4random_uniform(3))
@@ -47,6 +54,8 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
+        addChild(worldNode)
+        
         let w = (self.size.width) / 3.5
         let spacing = w/8
         ratio = ((frame.width)/(375))
@@ -55,21 +64,21 @@ class GameScene: SKScene {
         freqOfShapes = startfreqOfShapes
         
         leftTapCircle = SKSpriteNode(imageNamed: Common.TapCircleImage)
-        addChild(leftTapCircle)
+        worldNode.addChild(leftTapCircle)
         leftTapCircle.position = CGPoint(x: spacing + w/2, y: size.height * 0.2)
         leftTapCircle.zPosition = 2
         leftTapCircle.size = CGSize(width: w, height: w)
         leftTapCircle.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.8)))
         
         middleTapCircle = SKSpriteNode(imageNamed: Common.TapCircleImage)
-        addChild(middleTapCircle)
+        worldNode.addChild(middleTapCircle)
         middleTapCircle.position = CGPoint(x: size.width/2, y: size.height * 0.2)
         middleTapCircle.zPosition = 2
         middleTapCircle.size = CGSize(width: w, height: w)
         middleTapCircle.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(-Double.pi), duration: 0.8)))
         
         rightTapCircle = SKSpriteNode(imageNamed: Common.TapCircleImage)
-        addChild(rightTapCircle)
+        worldNode.addChild(rightTapCircle)
         rightTapCircle.position = CGPoint(x: size.width - spacing - w/2, y: size.height * 0.2)
         rightTapCircle.zPosition = 2
         rightTapCircle.size = CGSize(width: w, height: w)
@@ -98,7 +107,9 @@ class GameScene: SKScene {
         scoreLabel.text = "0"
         scoreLabel.fontColor = SKColor.white
         scoreLabel.position = CGPoint(x: size.width/2, y: size.height * 0.85)
-        addChild(scoreLabel)
+        worldNode.addChild(scoreLabel)
+        
+        playMusic(filename: Common.MainGameWav)
     }
     
     @objc func addShape(){
@@ -135,7 +146,8 @@ class GameScene: SKScene {
                 self.rightShapes.removeFirst()
             }
         }
-        addChild(shape)
+        
+        worldNode.addChild(shape)
         
         shape.run(SKAction.scale(to: 2.5, duration: TimeInterval(speedOfShapes)))
         let actionMove = SKAction.move(to: pos, duration: TimeInterval(speedOfShapes))
@@ -156,17 +168,32 @@ class GameScene: SKScene {
                     action.speed = CGFloat(freqOfShapes)
                 }
             }
+            if(backroundmusicRate < maxBackroundmusicRate){
+                backroundmusicRate += ((maxBackroundmusicRate - 1) / (scoreTillMaxSpeed))
+                backgroundMusicPlayer?.rate = Float(backroundmusicRate)
+            }
         }
-        
         scoreLabel.text = "\(totalScore)"
         scoreLabel.run(SKAction.init(named: Common.Scale)!)
     }
     
     func endGame(){
-        let scene = EndGameScene(size: (view?.bounds.size)!)
-        scene.score = totalScore
-        scene.scaleMode = SKSceneScaleMode.aspectFill
-        view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 0.8))
+        let endAction = SKAction.run {
+            self.backgroundMusicPlayer?.stop()
+            let scene = EndGameScene(size: (self.view?.bounds.size)!)
+            scene.score = self.totalScore
+            scene.scaleMode = SKSceneScaleMode.aspectFill
+            self.view?.presentScene(scene, transition: SKTransition.crossFade(withDuration: 1.5))
+        }
+        let pause = SKAction.run {
+            self.worldNode.isPaused = true
+        }
+        
+        run(SKAction.sequence([
+            pause,
+            SKAction.playSoundFileNamed(Common.LoseWav, waitForCompletion: true),
+            endAction
+        ]))
     }
     
     func increaseRect(rect: CGRect, byPercentage percentage: CGFloat) -> CGRect {
@@ -181,13 +208,21 @@ class GameScene: SKScene {
         if(leftTapCircle.contains(pos)){
             leftTapCircle.run(SKAction.init(named: Common.Scale)!)
             if(leftShapes.isEmpty){return}
-            let shapeFrame = increaseRect(rect: (leftShapes.first?.frame)!, byPercentage: 1.2)
+            let shapeFrame = increaseRect(rect: (leftShapes.first?.frame)!, byPercentage: 1.3)
             if(shapeFrame.contains((leftTapCircle.position))){
+                let particle = SKEmitterNode(fileNamed: Common.SparkParticle)
+                particle?.position = self.leftTapCircle.position
+                particle?.targetNode = self.leftTapCircle
+                let waitAction = SKAction.wait(forDuration: 0.2)
+                let actionMoveDone = SKAction.removeFromParent()
+                particle?.run(SKAction.sequence([waitAction, actionMoveDone]))
                 leftShapes.first?.removeFromParent()
+                worldNode.addChild(particle!)
                 leftShapes.removeFirst()
                 totalScore += 1
                 
             } else {
+                run(loseSound)
                 if(totalScore > 0){
                     totalScore -= 1
                 }
@@ -196,12 +231,20 @@ class GameScene: SKScene {
         } else if(middleTapCircle.contains(pos)){
             middleTapCircle.run(SKAction.init(named: Common.Scale)!)
             if(middleShapes.isEmpty){return}
-            let shapeFrame = increaseRect(rect: (middleShapes.first?.frame)!, byPercentage: 1.2)
+            let shapeFrame = increaseRect(rect: (middleShapes.first?.frame)!, byPercentage: 1.3)
             if(shapeFrame.contains((middleTapCircle.position))){
+                let particle = SKEmitterNode(fileNamed: Common.SparkParticle)
+                particle?.position = self.middleTapCircle.position
+                particle?.targetNode = self.middleTapCircle
+                let waitAction = SKAction.wait(forDuration: 0.2)
+                let actionMoveDone = SKAction.removeFromParent()
+                particle?.run(SKAction.sequence([waitAction, actionMoveDone]))
                 middleShapes.first?.removeFromParent()
+                worldNode.addChild(particle!)
                 middleShapes.removeFirst()
                 totalScore += 1
             } else {
+                run(loseSound)
                 if(totalScore > 0){
                     totalScore -= 1
                 }
@@ -210,12 +253,20 @@ class GameScene: SKScene {
         } else if(rightTapCircle.contains(pos)){
             rightTapCircle.run(SKAction.init(named: Common.Scale)!)
             if(rightShapes.isEmpty){return}
-            let shapeFrame = increaseRect(rect: (rightShapes.first?.frame)!, byPercentage: 1.2)
+            let shapeFrame = increaseRect(rect: (rightShapes.first?.frame)!, byPercentage: 1.3)
             if(shapeFrame.contains((rightTapCircle.position))){
+                let particle = SKEmitterNode(fileNamed: Common.SparkParticle)
+                particle?.position = self.rightTapCircle.position
+                particle?.targetNode = self.rightTapCircle
+                let waitAction = SKAction.wait(forDuration: 0.2)
+                let actionMoveDone = SKAction.removeFromParent()
+                particle?.run(SKAction.sequence([waitAction, actionMoveDone]))
                 rightShapes.first?.removeFromParent()
+                worldNode.addChild(particle!)
                 rightShapes.removeFirst()
                 totalScore += 1
             } else {
+                run(loseSound)
                 if(totalScore > 0){
                     totalScore -= 1
                 }
@@ -234,6 +285,24 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+    }
+    
+    func playMusic(filename: String) {
+        let url = Bundle.main.url(forResource: filename, withExtension: nil)
+        if (url == nil) {
+            print("Could not find file: \(filename)")
+            return
+        }
+        do { backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url!, fileTypeHint: nil) }
+        catch let error as NSError { print(error.description) }
+        if let player = backgroundMusicPlayer {
+            player.volume = 1
+            player.numberOfLoops = -1
+            player.enableRate = true
+            player.rate = 1.0
+            player.prepareToPlay()
+            player.play()
+        }
     }
 }
 

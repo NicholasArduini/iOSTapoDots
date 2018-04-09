@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D2A7A70204717D40053D2FD /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2A7A6F204717D40053D2FD /* IAPManager.swift */; };
+		5D2A7A7220471CD80053D2FD /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D2A7A7120471CD80053D2FD /* GameKit.framework */; };
+		5D371A50207AD62E000D92F0 /* Miss.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5D371A4E207AD62D000D92F0 /* Miss.wav */; };
+		5D371A51207AD62E000D92F0 /* Lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5D371A4F207AD62E000D92F0 /* Lose.wav */; };
+		5D371A53207AE8F2000D92F0 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5D371A52207AE8F2000D92F0 /* Spark.sks */; };
 		5D46BC572026230D00B36710 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D46BC562026230D00B36710 /* AppDelegate.swift */; };
 		5D46BC5B2026230D00B36710 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5D46BC5A2026230D00B36710 /* Actions.sks */; };
 		5D46BC5D2026230D00B36710 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D46BC5C2026230D00B36710 /* GameScene.swift */; };
@@ -17,10 +22,17 @@
 		5D46BC71202625D100B36710 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D46BC6E202625D000B36710 /* Common.swift */; };
 		5D46BC72202625D100B36710 /* EndGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D46BC6F202625D100B36710 /* EndGameScene.swift */; };
 		5D46BC73202625D100B36710 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D46BC70202625D100B36710 /* MenuScene.swift */; };
+		5DEB3AAE2074780C00EED2DD /* IntroMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5DEB3AAB2074780B00EED2DD /* IntroMusic.wav */; };
+		5DEB3AAF2074780C00EED2DD /* MainGame.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5DEB3AAC2074780C00EED2DD /* MainGame.wav */; };
 		CDDC1F96C8A90D6533A8A2A3 /* Pods_Tapo_Dots.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8AD00B77C51B5496E83EBE2 /* Pods_Tapo_Dots.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D2A7A6F204717D40053D2FD /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		5D2A7A7120471CD80053D2FD /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		5D371A4E207AD62D000D92F0 /* Miss.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Miss.wav; sourceTree = "<group>"; };
+		5D371A4F207AD62E000D92F0 /* Lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Lose.wav; sourceTree = "<group>"; };
+		5D371A52207AE8F2000D92F0 /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
 		5D46BC532026230D00B36710 /* Tapo Dots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tapo Dots.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D46BC562026230D00B36710 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5D46BC5A2026230D00B36710 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -33,6 +45,8 @@
 		5D46BC6E202625D000B36710 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		5D46BC6F202625D100B36710 /* EndGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameScene.swift; sourceTree = "<group>"; };
 		5D46BC70202625D100B36710 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		5DEB3AAB2074780B00EED2DD /* IntroMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = IntroMusic.wav; sourceTree = "<group>"; };
+		5DEB3AAC2074780C00EED2DD /* MainGame.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = MainGame.wav; sourceTree = "<group>"; };
 		B5F23F33FD3D7AD1D6EE4A59 /* Pods-Tapo Dots.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tapo Dots.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tapo Dots/Pods-Tapo Dots.debug.xcconfig"; sourceTree = "<group>"; };
 		E1BCF9B937BB748C677AA89D /* Pods-Tapo Dots.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tapo Dots.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tapo Dots/Pods-Tapo Dots.release.xcconfig"; sourceTree = "<group>"; };
 		E8AD00B77C51B5496E83EBE2 /* Pods_Tapo_Dots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tapo_Dots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,12 +58,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDC1F96C8A90D6533A8A2A3 /* Pods_Tapo_Dots.framework in Frameworks */,
+				5D2A7A7220471CD80053D2FD /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D371A54207B2755000D92F0 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				5DEB3AAB2074780B00EED2DD /* IntroMusic.wav */,
+				5D371A4F207AD62E000D92F0 /* Lose.wav */,
+				5D371A4E207AD62D000D92F0 /* Miss.wav */,
+				5DEB3AAC2074780C00EED2DD /* MainGame.wav */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		5D46BC4A2026230D00B36710 = {
 			isa = PBXGroup;
 			children = (
@@ -77,11 +103,14 @@
 				5D46BC5C2026230D00B36710 /* GameScene.swift */,
 				5D46BC70202625D100B36710 /* MenuScene.swift */,
 				5D46BC6F202625D100B36710 /* EndGameScene.swift */,
+				5D2A7A6F204717D40053D2FD /* IAPManager.swift */,
 				5D46BC6E202625D000B36710 /* Common.swift */,
 				5D46BC602026230D00B36710 /* Main.storyboard */,
+				5D371A54207B2755000D92F0 /* Music */,
 				5D46BC632026230D00B36710 /* Assets.xcassets */,
 				5D46BC652026230D00B36710 /* LaunchScreen.storyboard */,
 				5D46BC682026230D00B36710 /* Info.plist */,
+				5D371A52207AE8F2000D92F0 /* Spark.sks */,
 			);
 			path = "Tapo Dots";
 			sourceTree = "<group>";
@@ -98,6 +127,7 @@
 		F3CC186EE10C0327AF41F6BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5D2A7A7120471CD80053D2FD /* GameKit.framework */,
 				E8AD00B77C51B5496E83EBE2 /* Pods_Tapo_Dots.framework */,
 			);
 			name = Frameworks;
@@ -139,6 +169,14 @@
 					5D46BC522026230D00B36710 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -165,10 +203,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DEB3AAE2074780C00EED2DD /* IntroMusic.wav in Resources */,
 				5D46BC622026230D00B36710 /* Main.storyboard in Resources */,
 				5D46BC642026230D00B36710 /* Assets.xcassets in Resources */,
 				5D46BC672026230D00B36710 /* LaunchScreen.storyboard in Resources */,
+				5D371A53207AE8F2000D92F0 /* Spark.sks in Resources */,
+				5DEB3AAF2074780C00EED2DD /* MainGame.wav in Resources */,
+				5D371A50207AD62E000D92F0 /* Miss.wav in Resources */,
 				5D46BC5B2026230D00B36710 /* Actions.sks in Resources */,
+				5D371A51207AD62E000D92F0 /* Lose.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D2A7A70204717D40053D2FD /* IAPManager.swift in Sources */,
 				5D46BC71202625D100B36710 /* Common.swift in Sources */,
 				5D46BC5D2026230D00B36710 /* GameScene.swift in Sources */,
 				5D46BC5F2026230D00B36710 /* GameViewController.swift in Sources */,
@@ -373,13 +417,16 @@
 			baseConfigurationReference = B5F23F33FD3D7AD1D6EE4A59 /* Pods-Tapo Dots.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UDGJ8L64CG;
 				INFOPLIST_FILE = "Tapo Dots/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "nicholasarduini.Tapo-Dots";
+				PRODUCT_BUNDLE_IDENTIFIER = TapoDots.TapoDots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -390,13 +437,16 @@
 			baseConfigurationReference = E1BCF9B937BB748C677AA89D /* Pods-Tapo Dots.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UDGJ8L64CG;
 				INFOPLIST_FILE = "Tapo Dots/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "nicholasarduini.Tapo-Dots";
+				PRODUCT_BUNDLE_IDENTIFIER = TapoDots.TapoDots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -15,25 +15,58 @@ class Common : SKScene{
     static let TapoDots = "Tapo Dots"
     static let Best = "Best"
     
-    //Google Ads
+    //alerts
+    static let Error = "Error"
+    static let Success = "Success"
+    static let EnableIAP = "Please enable In App Purchases"
+    static let ProductNotFound = "Product not found"
+    static let RestoreComplete = "Remove Ads Restore Complete"
+    
+    //Google Ads //TODO
     static let AppID = "ca-app-pub-2495825697490692~7732834181"
-    static let BannerUnitID = "ca-app-pub-3940256099942544/2934735716"
-    static let InterstitialUnitID = "ca-app-pub-3940256099942544/4411468910"
+    static let BannerUnitID = "ca-app-pub-3940256099942544/2934735716" //testing
+    static let InterstitialUnitID = "ca-app-pub-3940256099942544/4411468910" //testing
     
     //SKActionKeys
     static let SpawingKey = "Spawning"
     
     //notification keys
     static let LoadAndShowAd = "LoadAndShowAd"
+    static let PurchasedGame = "PurchasedGame"
+    static let OpenGameCenter = "OpenGameCenter"
+    static let NewHighScore = "NewHighScore"
+    static let PresentAlert = "PresentAlert"
+    static let AdDissmissed = "AdDissmissed"
+    
+    //noificaions user info keys
+    static let ScoreInfo = "scoreInfo"
+    static let TitleInfo = "titleInfo"
+    static let MessageInfo = "messageInfo"
     
     //user default keys
     static let HighScoreKey = "HighScore"
+    static let PurchasedKey = "Purchased"
+    
+    //game center keys
+    static let leaderboardID = "com.highscore.tapodots"
+    
+    //IAP Product IDS
+    static let removeAdsPID = "RemoveAds"
     
     //assets
     static let TapCircleImage = "TapCircle"
     static let Ball = "Ball"
     static let Play = "Play"
     static let Retry = "Retry"
+    static let GameCenter = "GameCenter"
+    static let RemoveAds = "RemoveAds"
+    static let Restore = "Restore"
+    
+    //music
+    static let LoseWav = "Lose.wav"
+    static let MissWav = "Miss.wav"
+    static let MainGameWav = "MainGame.wav"
+    static let IntroWav = "IntroMusic.wav"
     
     //fonts
     static let FuturaMDITFont = "Futura-MediumItalic"
@@ -44,6 +77,9 @@ class Common : SKScene{
     static let Shake = "Shake"
     static let ScaleBig = "ScaleBig"
     static let Scale = "Scale"
+    
+    //particle
+    static let SparkParticle = "Spark.sks"
 }
 
 extension SKColor{
