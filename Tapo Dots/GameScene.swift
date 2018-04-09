@@ -56,7 +56,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         addChild(worldNode)
         
-        let w = (self.size.width) / 3.5
+        let w = (self.size.width) / 3.4
         let spacing = w/8
         ratio = ((frame.width)/(375))
         

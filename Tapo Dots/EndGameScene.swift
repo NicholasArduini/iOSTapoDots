@@ -185,7 +185,7 @@ class EndGameScene: SKScene {
             addChild(highScoreLabel)
         }
         
-        let w = (self.size.width) / 3
+        let w = (self.size.width) / 2.8
         let labelRetryw = w * 0.6
         let labelRetryh = labelRetryw/2.8
         labelRetry = SKSpriteNode(imageNamed: Common.Retry)

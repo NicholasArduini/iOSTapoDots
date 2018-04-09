@@ -138,7 +138,7 @@ class MenuScene: SKScene {
             addChild(highScoreLabel)
         }
         
-        let w = (self.size.width) / 3
+        let w = (self.size.width) / 2.8
         let labelPlayw = w * 0.6
         let labelPlayh = labelPlayw/2.12
         labelPlay = SKSpriteNode(imageNamed: Common.Play)
