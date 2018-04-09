@@ -22,7 +22,6 @@ class MenuScene: SKScene {
     var bottomMiddleY = CGFloat(0.4)
     var middleY = CGFloat(0.5)
     var upperY = CGFloat(0.75)
-    var backgroundMusicPlayer : AVAudioPlayer?
     
     override func didMove(to view: SKView) {
         buildMenu()
@@ -159,30 +158,12 @@ class MenuScene: SKScene {
         labelSpin.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 0.8)))
         addChild(labelSpin)
         
-        self.playMusic(filename: Common.IntroWav)
+        let audioNode = SKAudioNode(fileNamed: Common.IntroWav)
+        addChild(audioNode)
+        
     }
     
     func appDelegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-    
-    func playMusic(filename: String) {
-        let url = Bundle.main.url(forResource: filename, withExtension: nil)
-        if (url == nil) {
-            print("Could not find file: \(filename)")
-            return
-        }
-        do { backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url!, fileTypeHint: nil) }
-        catch let error as NSError { print(error.description) }
-        if let player = backgroundMusicPlayer {
-            player.volume = 1
-            player.numberOfLoops = -1
-            player.enableRate = true
-            player.rate = 1.0
-            player.prepareToPlay()
-            player.play()
-        }
-    }
-    
-
 }

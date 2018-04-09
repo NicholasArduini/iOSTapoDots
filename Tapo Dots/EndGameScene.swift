@@ -21,6 +21,7 @@ class EndGameScene: SKScene {
     private var gameCenterButton = SKSpriteNode()
     private var removeAdsButton = SKSpriteNode()
     private var restoreAdsButton = SKSpriteNode()
+    private var backgrounMusicAudioNode = SKAudioNode()
     var score: Int = 0
     var isHighScore = false
     var ratio = CGFloat(0.0)
@@ -28,28 +29,32 @@ class EndGameScene: SKScene {
     var bottomMiddleY = CGFloat(0.4)
     var middleY = CGFloat(0.5)
     var upperY = CGFloat(0.75)
-    var backgroundMusicPlayer : AVAudioPlayer?
     
     override func didMove(to view: SKView) {
-        let randomShouldShowAd = Int(arc4random_uniform(3))
-        let randomShouldShowRequestReview = Int(arc4random_uniform(10))
-        if(randomShouldShowAd == 1){
-            run(SKAction.sequence([
-                SKAction.run { self.backgroundMusicPlayer?.pause() },
-                SKAction.wait(forDuration: 0.05), //wait for delay of opening scene
-                SKAction.run { self.displayAd()}]))
-        }
+        self.backgrounMusicAudioNode = SKAudioNode(fileNamed: Common.IntroWav)
+        addChild(backgrounMusicAudioNode)
         
-        if(randomShouldShowRequestReview == 1){
-            if #available(iOS 10.3, *) {
-                SKStoreReviewController.requestReview()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            let randomShouldShowAd = Int(arc4random_uniform(3))
+            let randomShouldShowRequestReview = Int(arc4random_uniform(10))
+            if(randomShouldShowAd == 1){
+                self.run(SKAction.sequence([
+                    SKAction.run { self.backgrounMusicAudioNode.run(SKAction.pause()) },
+                    SKAction.wait(forDuration: 0.05), //wait for delay of opening scene
+                    SKAction.run { self.displayAd()}]))
             }
+            
+            if(randomShouldShowRequestReview == 1){
+                if #available(iOS 10.3, *) {
+                    SKStoreReviewController.requestReview()
+                }
+            }
+            
+            self.buildMenu()
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(EndGameScene.purchasedGame), name: NSNotification.Name(rawValue: Common.PurchasedGame), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(EndGameScene.resumeMusic), name: NSNotification.Name(rawValue: Common.AdDissmissed), object: nil)
         }
-        
-        buildMenu()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(EndGameScene.purchasedGame), name: NSNotification.Name(rawValue: Common.PurchasedGame), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(EndGameScene.resumeMusic), name: NSNotification.Name(rawValue: Common.AdDissmissed), object: nil)
     }
     
     func setBackgroundColor(){
@@ -103,7 +108,7 @@ class EndGameScene: SKScene {
     }
     
     @objc func resumeMusic(){
-        backgroundMusicPlayer?.play()
+        self.backgrounMusicAudioNode.run(SKAction.play())
     }
     
     func isPurchased() ->Bool{
@@ -218,29 +223,9 @@ class EndGameScene: SKScene {
                     ])
             ))
         }
-        
-        self.playMusic(filename: Common.IntroWav)
     }
     
     func appDelegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
-    }
-    
-    func playMusic(filename: String) {
-        let url = Bundle.main.url(forResource: filename, withExtension: nil)
-        if (url == nil) {
-            print("Could not find file: \(filename)")
-            return
-        }
-        do { backgroundMusicPlayer = try AVAudioPlayer(contentsOf: url!, fileTypeHint: nil) }
-        catch let error as NSError { print(error.description) }
-        if let player = backgroundMusicPlayer {
-            player.volume = 1
-            player.numberOfLoops = -1
-            player.enableRate = true
-            player.rate = 1.0
-            player.prepareToPlay()
-            player.play()
-        }
     }
 }
