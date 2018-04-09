@@ -1,14 +1,13 @@
 # iOSTapoDots
 
 * iOS SpriteKit Game that has the user tap patterns of dots falling from the screen at increased speeds and frequencies
-* Custom music and sound effects will be added in a future update
-* After this future update GameCentre and a in app purchase to remove ads will be implemented in order to prepare TapoDots for App Store submission
-* Google AdMob implementation (disabled here for demonstration purposes)
+* Custom music and sound effects has been provided by Josh Arduini
+* Game Center integration
+* Google AdMob used for banner and interstitial ads, and in app purchases integrated to remove ads
 
 
-##Download Link
-Pending future update
+## Download Link
+Download Link Available for a free download in the iOS App store: https://itunes.apple.com/us/app/tapo-dots/id1346834645?mt=8
 
-![alt tag](https://user-images.githubusercontent.com/14320184/35782881-3205d9e2-09cd-11e8-884a-c2b367da5e46.gif)
-![alt tag](https://user-images.githubusercontent.com/14320184/35782880-31f690ea-09cd-11e8-8c43-274c8d01b3df.PNG)
-![alt tag](https://user-images.githubusercontent.com/14320184/35782879-31eb3f2e-09cd-11e8-9084-10c9aee5e7e4.PNG)
+![alt tag](https://user-images.githubusercontent.com/14320184/38480807-ad0d4ae0-3b95-11e8-8f2b-c8b0959b8c2c.gif)
+![alt tag](https://user-images.githubusercontent.com/14320184/38480793-904e85fe-3b95-11e8-881f-ba08167f03f7.PNG)
